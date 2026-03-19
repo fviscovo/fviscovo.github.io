@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Felipe Viscovo — Desenvolvedor WordPress especializado em criar experiências digitais únicas e de alta performance." />
+    <title>Felipe Viscovo — Desenvolvedor WordPress</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500&display=swap" rel="stylesheet" />
+    <style>
+        /* ============================================
+           DESIGN PHILOSOPHY: Obsidian Craft
+           Luxury Minimal Dark — Silence as power
+           ============================================ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: #080808;
+            color: #D4D4D8;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           GRAIN TEXTURE OVERLAY
+           ============================================ */
+        .grain-overlay::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.35;
+            mix-blend-mode: overlay;
+        }
+
+        /* ============================================
+           HERO BACKGROUND
+           ============================================ */
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background-image: url('images/cosmos-2.webp');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.8;
+        }
+
+        /* ============================================
+           RADIAL GLOWS
+           ============================================ */
+        .glow-purple {
+            position: absolute;
+            top: -10%;
+            left: -5%;
+            width: 55vw;
+            height: 55vw;
+            background: radial-gradient(ellipse at center, rgba(124,58,237,0.13) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .glow-orange {
+            position: absolute;
+            bottom: -10%;
+            right: -5%;
+            width: 45vw;
+            height: 45vw;
+            background: radial-gradient(ellipse at center, rgba(234,88,12,0.08) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ============================================
+           PARTICLES CANVAS
+           ============================================ */
+        #particles-canvas {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ============================================
+           VERTICAL ACCENT LINE
+           ============================================ */
+        .accent-line {
+            position: absolute;
+            left: clamp(1.2rem, 3vw, 2.5rem);
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2px;
+            height: 0;
+            background: linear-gradient(to bottom, #7C3AED, #C9A84C, #EA580C);
+            border-radius: 1px;
+            z-index: 10;
+            animation: lineGrow 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes lineGrow {
+            from {
+                height: 0;
+                opacity: 0;
+            }
+            to {
+                height: 60vh;
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 6px #4ade80;
+            }
+            50% {
+                opacity: 0.6;
+                box-shadow: 0 0 12px #4ade80;
+            }
+        }
+
+        .animate-fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .animate-fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .animate-slide-in-left {
+            opacity: 0;
+            animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-700 { animation-delay: 0.7s; }
+        .delay-800 { animation-delay: 0.8s; }
+        .delay-900 { animation-delay: 0.9s; }
+        .delay-1000 { animation-delay: 1.0s; }
+        .delay-1200 { animation-delay: 1.2s; }
+        .delay-1400 { animation-delay: 1.4s; }
+
+        /* ============================================
+           GRADIENT TEXT
+           ============================================ */
+        .gradient-text-gold {
+            background: linear-gradient(135deg, #7C3AED 0%, #C9A84C 50%, #EA580C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-silver {
+            background: linear-gradient(135deg, #F5F5F5 0%, #D4D4D8 40%, #A1A1AA 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ============================================
+           MAIN CONTAINER
+           ============================================ */
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-left: clamp(3.5rem, 7vw, 7rem);
+            padding-right: clamp(1.5rem, 6vw, 5rem);
+        }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 2rem;
+            animation: fadeIn 1s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .monogram {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 800;
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #7C3AED 0%, #C9A84C 50%, #EA580C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .divider {
+            width: 1px;
+            height: 1.2rem;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .subtitle {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 300;
+            font-size: clamp(0.65rem, 1.1vw, 0.78rem);
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: rgba(212, 212, 216, 0.55);
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 2px;
+            padding: 0.35rem 0.85rem;
+            background: rgba(124, 58, 237, 0.07);
+            animation: fadeIn 1s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #4ade80;
+            box-shadow: 0 0 6px #4ade80;
+            animation: pulse 2s infinite;
+        }
+
+        .status-text {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 500;
+            font-size: 0.68rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(212, 212, 216, 0.7);
+        }
+
+        /* ============================================
+           HERO CENTER CONTENT
+           ============================================ */
+        .hero-center {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .name-block {
+            margin-bottom: 1.5rem;
+        }
+
+        .greeting {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 300;
+            font-size: clamp(0.65rem, 1.1vw, 0.8rem);
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color: rgba(201, 168, 76, 0.8);
+            margin-bottom: 0.6rem;
+            animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+            opacity: 0;
+        }
+
+        .name-first {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 800;
+            font-size: clamp(3rem, 9vw, 8rem);
+            letter-spacing: -0.02em;
+            line-height: 0.92;
+            background: linear-gradient(135deg, #F5F5F5 0%, #D4D4D8 40%, #A1A1AA 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+            opacity: 0;
+        }
+
+        .name-last {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 800;
+            font-size: clamp(3rem, 9vw, 8rem);
+            letter-spacing: -0.02em;
+            line-height: 0.92;
+            background: linear-gradient(135deg, #7C3AED 0%, #C9A84C 55%, #EA580C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.15em;
+            animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+            opacity: 0;
+        }
+
+        .divider-line {
+            width: clamp(3rem, 8vw, 6rem);
+            height: 1px;
+            background: linear-gradient(to right, rgba(124, 58, 237, 0.8), rgba(201, 168, 76, 0.6), transparent);
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease 0.6s forwards;
+            opacity: 0;
+        }
+
+        .phrase-container {
+            max-width: clamp(280px, 55vw, 680px);
+            animation: fadeIn 1s ease 0.7s forwards;
+            opacity: 0;
+        }
+
+        .phrase {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 300;
+            font-size: clamp(1.1rem, 2.8vw, 2rem);
+            line-height: 1.45;
+            color: rgba(212, 212, 216, 0.92);
+            letter-spacing: -0.01em;
+            min-height: 2.4em;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.1em;
+            background: #EA580C;
+            margin-left: 3px;
+            vertical-align: text-bottom;
+            animation: blink 0.9s step-end infinite;
+        }
+
+        /* ============================================
+           CTA BUTTONS
+           ============================================ */
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2.5rem;
+            animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+            opacity: 0;
+        }
+
+        .btn {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 600;
+            font-size: clamp(0.72rem, 1.1vw, 0.82rem);
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            padding: 0.75rem 2rem;
+            border-radius: 2px;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s, transform 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            color: #080808;
+            background: linear-gradient(135deg, #EA580C 0%, #C9A84C 100%);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            font-weight: 500;
+            color: rgba(212, 212, 216, 0.75);
+            padding: 0.75rem 2rem;
+            border: 1px solid rgba(212, 212, 216, 0.18);
+            background: transparent;
+        }
+
+        .btn-secondary:hover {
+            color: #EA580C;
+            border-color: rgba(234, 88, 12, 0.5);
+            transform: translateY(-1px);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 2rem;
+            animation: fadeIn 1s ease 1.4s forwards;
+            opacity: 0;
+        }
+
+        .footer-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .footer-link {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 400;
+            font-size: 0.68rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(232, 232, 232, 0.6);
+            text-decoration: none;
+            transition: color 0.2s;
+            animation: fadeIn 1.4s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        .footer-link:hover {
+            color: #EA580C;
+        }
+
+        .footer-copyright {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 300;
+            font-size: 0.62rem;
+            letter-spacing: 0.18em;
+            color: rgba(212, 212, 216, 0.25);
+            text-transform: uppercase;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 1.5rem;
+                padding-right: 1rem;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .header-left {
+                justify-content: center;
+            }
+
+            .status-badge {
+                justify-content: center;
+            }
+
+            .cta-row {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .footer-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grain-overlay">
+        <div class="hero-bg"></div>
+        <div class="glow-purple"></div>
+        <div class="glow-orange"></div>
+        <canvas id="particles-canvas"></canvas>
+
+        <div class="accent-line"></div>
+
+        <main class="container">
+            <!-- Header -->
+            <header>
+                <!--div class="header-left">
+                    <span class="subtitle">WordPress Developer</span>
+                </div>
+                <div-- class="status-badge">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Disponível para projetos</span>
+                </div-->
+            </header>
+
+            <!-- Hero Center -->
+            <div class="hero-center">
+                <div class="name-block">
+                     <!-- p class="greeting">Olá, eu sou</p -->
+                    <h1 class="name-first">Felipe</h1>
+                    <h1 class="name-last">Viscovo</h1>
+                </div>
+
+                <div class="divider-line"></div>
+
+                <div class="phrase-container">
+                    <p class="phrase">
+                        <span id="phrase-text"></span><span id="cursor" class="cursor" style="display: none;"></span>
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <a href="https://www.linkedin.com/in/fviscovo/" target="_blank" class="footer-link">LinkedIn</a>
+                    <a href="https://github.com/fviscovo?tab=overview" target="_blank" class="footer-link">GitHub</a>
+                </div>
+
+                <!--div class="cta-row">
+                    <a href="mailto:contato@felipeviscovo.com" class="btn btn-primary">Entre em contato</a>
+                    <a href="#" class="btn btn-secondary">Ver projetos</a>
+                </div-->
+            </div>
+
+            <!-- Footer -->
+            <footer>
+                
+                <p class="footer-copyright">© <span id="year"></span> Felipe Viscovo</p>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // ============================================
+        // PARTICLES ANIMATION
+        // ============================================
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const particles = [];
+        const colors = [
+            'rgba(124,58,237,',  // purple
+            'rgba(201,168,76,',  // gold
+            'rgba(234,88,12,',   // orange
+            'rgba(212,212,216,', // silver
+        ];
+
+        for (let i = 0; i < 80; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 1.5 + 0.3,
+                vx: (Math.random() - 0.5) * 0.18,
+                vy: (Math.random() - 0.5) * 0.18,
+                alpha: Math.random() * 0.4 + 0.1,
+                color: colors[Math.floor(Math.random() * colors.length)],
+            });
+        }
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (const p of particles) {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = `${p.color}${p.alpha})`;
+                ctx.fill();
+                p.x += p.vx;
+                p.y += p.vy;
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
+            }
+            requestAnimationFrame(drawParticles);
+        }
+        drawParticles();
+
+        // ============================================
+        // TYPEWRITER EFFECT
+        // ============================================
+        const text = "Desenvolvedor Web Front End Wordpress";
+        const speed = 42;
+        const startDelay = 1400;
+        let index = 0;
+
+        function typeWriter() {
+            const phraseText = document.getElementById('phrase-text');
+            const cursor = document.getElementById('cursor');
+
+            if (index < text.length) {
+                phraseText.textContent += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, speed);
+            } else {
+                cursor.style.display = 'none';
+            }
+        }
+
+        setTimeout(() => {
+            document.getElementById('cursor').style.display = 'inline-block';
+            typeWriter();
+        }, startDelay);
+
+        // ============================================
+        // FOOTER YEAR
+        // ============================================
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
